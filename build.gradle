@@ -32,9 +32,18 @@ jar {
 	from {configurations.compile.collect { it.isDirectory() ? it : zipTree(it)}}
 }
 
+def kotlinModule(String name) {
+	"org.jetbrains.kotlin:kotlin-$name:$kotlin_version"
+}
+
 dependencies {
-	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+	compile kotlinModule("stdlib")
+	compile kotlinModule("script-runtime")
+//	compile kotlinModule("reflect")
+//	compile kotlinModule("compiler")
+//	compile kotlinModule("runtime")
+
 }
 
 defaultTasks 'clean', 'run'
